@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const motivation = async (token) => {
-    const {data} = await axios.get('/api/motivation',{
+const candaanApi = async (token) => {
+    const {data} = await axios.get('/api/candaan',{
         headers : {
             "Authorization" : `Bearer ${token}`
         }
@@ -9,4 +9,4 @@ const motivation = async (token) => {
     return data
 }
  
-export default motivation;
+export default candaanApi;

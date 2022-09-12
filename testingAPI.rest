@@ -57,7 +57,7 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "email" : "tito@gmail.com",
+    "email" : "muizzuddin332@gmail.com",
     "password" : "12345"
 }
 
@@ -98,4 +98,4 @@ Content-Type: application/json
 
 ### motivation
 GET http://localhost:3000/api/motivation
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWM3ODM3OTk4ZmYyYzhiYWIzZjhjNCIsImlhdCI6MTY2MjgxMDE5NywiZXhwIjoxNjYyODk2NTk3fQ.OVUTL5V6HY2qcYqsW7m_Kuwr-x8XVkdMIN1rzXo2VYY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWQ1OTZmZDRmMjZlYmEzNmUzZTQzNSIsImlhdCI6MTY2Mjk0MjM3MiwiZXhwIjoxNjYzMDI4NzcyfQ.Q5yrNJSTEYitcAl4h0xkbP3gortnM-aYgO7z6hVG7bc

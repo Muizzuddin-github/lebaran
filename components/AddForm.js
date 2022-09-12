@@ -41,12 +41,12 @@ const AddForm = ({setKunjungan}) => {
     }
 
     const close = () => {
-        const quote = document.querySelector('.quote')
+        const candaan = document.querySelector('.candaan')
         const addForm = document.querySelector('.add-form')
         const layarAksi = document.querySelector('.layar-aksi')
         addForm.classList.add('hidden')
 
-        if(quote.classList.contains('opacity-0')){
+        if(candaan.classList.contains('opacity-0')){
             layarAksi.classList.add('hidden')
         }
 

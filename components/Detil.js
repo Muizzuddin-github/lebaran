@@ -25,11 +25,11 @@ const Detil = ({singleKunjungan}) => {
     const tutup = () => {
         const detilKunjungan = document.querySelector('.detil-kunjungan')
         const layarAksi = document.querySelector('.layar-aksi')
-        const quoteTampil = document.querySelector('.quote')
+        const candaanTampil = document.querySelector('.candaan')
 
-        if(!quoteTampil.classList.contains('opacity-0')){
-            quoteTampil.classList.add('-translate-y-[120%]')
-            quoteTampil.classList.add('opacity-0')
+        if(!candaanTampil.classList.contains('opacity-0')){
+            candaanTampil.classList.add('-translate-y-[120%]')
+            candaanTampil.classList.add('opacity-0')
         }
 
         detilKunjungan.classList.add('hidden')

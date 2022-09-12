@@ -204,7 +204,7 @@ export const infoUser = (e) => {
    }
 }
 
-export const tomboltutupPeringatanHapusAkun = () => {
+export const tombolTutupPeringatanHapusAkun = () => {
    const menuAktif = document.querySelector('.sub-nav .menu-aktif')
    const menuUserAktif = document.querySelector('.sub-nav .user-info-aktif')
    const hapusAkun = document.querySelector('.sub-nav .hapus-akun')

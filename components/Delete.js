@@ -43,11 +43,11 @@ const Delete = ({singleKunjungan,setKunjungan}) => {
     const close = () => {
         const deleteKunjungan = document.querySelector('.delete-kunjungan')
         const layarAksi = document.querySelector('.layar-aksi')
-        const quoteTampil = document.querySelector('.quote')
+        const candaanTampil = document.querySelector('.candaan')
 
-        if(!quoteTampil.classList.contains('opacity-0')){
-            quoteTampil.classList.add('-translate-y-[120%]')
-            quoteTampil.classList.add('opacity-0')
+        if(!candaanTampil.classList.contains('opacity-0')){
+            candaanTampil.classList.add('-translate-y-[120%]')
+            candaanTampil.classList.add('opacity-0')
         }
 
         deleteKunjungan.classList.add('hidden')

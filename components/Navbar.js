@@ -4,7 +4,7 @@ import AlertAuth from "./AlertAuth";
 import UbahNama from "./UbahNama";
 import { 
    menuAktifNavbar,toggle,mode,userInfoAktif,
-   tombolAkunDihapus,infoUser,tomboltutupPeringatanHapusAkun,tombolHapusAkun,logout,
+   tombolAkunDihapus,infoUser,tombolTutupPeringatanHapusAkun,tombolHapusAkun,logout,
    penUbahNama
 } from "./events/navbarEvents";
 import { useState } from "react";
@@ -78,7 +78,7 @@ const Navbar = ({user}) => {
                               </section>
                               <section className="self-end mt-3">
                                  <button className="py-1 px-4 bg-biru text-white rounded-md mr-1 text-sm" onClick={tombolAkunDihapus}>Hapus</button>
-                                 <button className="py-1 px-4 text-white bg-sal rounded-md ml-1 text-sm"  onClick={tomboltutupPeringatanHapusAkun}>Tidak</button>
+                                 <button className="py-1 px-4 text-white bg-sal rounded-md ml-1 text-sm"  onClick={tombolTutupPeringatanHapusAkun}>Tidak</button>
                               </section>
                            </section>
                         </section>
