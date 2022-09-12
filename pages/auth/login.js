@@ -34,19 +34,28 @@ const Login = () => {
         const iconPemberitahuan = pemberitahuan.querySelector('.fa-solid')
 
         try{
-            const {data} = await authLogin({email,password})
             iconPemberitahuan.classList.remove('text-sal')
             iconPemberitahuan.classList.remove('fa-circle-xmark')
-
+            iconPemberitahuan.classList.remove('fa-circle-check')
             iconPemberitahuan.classList.remove('fa-envelope-circle-check')
-            iconPemberitahuan.classList.add('fa-circle-check')
+            iconPemberitahuan.classList.add('fa-rotate')
+            iconPemberitahuan.classList.add('animate-iconBerputar')
+            
             iconPemberitahuan.classList.add('text-biru')
-            iconPemberitahuan.nextElementSibling.textContent = data.msg
-
+            iconPemberitahuan.nextElementSibling.textContent = 'Tunggu sebentar'
+            
             layarAksiLogin.classList.remove('hidden')
             layarAksiLogin.classList.remove('cursor-pointer')
             pemberitahuan.classList.remove('opacity-0')
             pemberitahuan.classList.remove('-translate-y-full')
+            const {data} = await authLogin({email,password})
+
+            setTimeout(function(){
+                iconPemberitahuan.classList.remove('fa-rotate')
+                iconPemberitahuan.classList.remove('animate-iconBerputar')
+                iconPemberitahuan.classList.add('fa-envelope-circle-check')
+                iconPemberitahuan.nextElementSibling.textContent = data.msg
+            },1000)
 
             Cookies.set('token',data.token,{expires : 1})
             setEmail('')
@@ -58,16 +67,20 @@ const Login = () => {
            
 
         }catch({response}){
-            iconPemberitahuan.classList.remove('text-biru')            
-            iconPemberitahuan.classList.remove('fa-envelope-circle-check')
-            iconPemberitahuan.classList.add('fa-circle-xmark')
-            iconPemberitahuan.classList.add('text-sal')
-            iconPemberitahuan.nextElementSibling.textContent = response.data.msg
-
-            layarAksiLogin.classList.remove('hidden')
-            layarAksiLogin.classList.add('cursor-pointer')
-            pemberitahuan.classList.remove('opacity-0')
-            pemberitahuan.classList.remove('-translate-y-full')
+            layarAksiLogin.classList.remove('cursor-pointer')
+            setTimeout(function(){
+                iconPemberitahuan.classList.remove('fa-rotate')
+                iconPemberitahuan.classList.remove('animate-iconBerputar')
+                iconPemberitahuan.classList.remove('text-biru')
+                iconPemberitahuan.classList.add('fa-circle-xmark')
+                iconPemberitahuan.classList.add('text-sal')
+                iconPemberitahuan.nextElementSibling.textContent = response.data.msg
+    
+                layarAksiLogin.classList.remove('hidden')
+                layarAksiLogin.classList.add('cursor-pointer')
+                pemberitahuan.classList.remove('opacity-0')
+                pemberitahuan.classList.remove('-translate-y-full')
+            },1500)
         }
 
     }
@@ -92,9 +105,6 @@ const Login = () => {
 
         if(e.target.classList.contains('layar-aksi-login')){
             if(iconPemberitahuan.classList.contains('fa-circle-xmark')){
-                pemberitahuan.classList.add('-translate-y-full')
-                layarAksiLogin.classList.add('hidden')
-            }else if(iconPemberitahuan.classList.contains('fa-envelope-circle-check')){
                 pemberitahuan.classList.add('-translate-y-full')
                 layarAksiLogin.classList.add('hidden')
             }
