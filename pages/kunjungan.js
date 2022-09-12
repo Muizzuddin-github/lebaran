@@ -180,7 +180,6 @@ export async function getServerSideProps(context){
     try{
         const {id} = jwt.verify(token,process.env.SECRET_LOGIN)
         const ambilUser = await Users.findOne({_id : id})
-
         if(!ambilUser){
             return {
                 redirect : {
@@ -201,8 +200,6 @@ export async function getServerSideProps(context){
             }
         }
     }
-
-
-
+    
     return {props : {user}}
 }
