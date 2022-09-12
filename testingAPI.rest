@@ -97,5 +97,5 @@ Content-Type: application/json
 
 
 ### motivation
-GET http://localhost:3000/api/motivation
+GET http://localhost:3000/api/motivasi
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWQ1OTZmZDRmMjZlYmEzNmUzZTQzNSIsImlhdCI6MTY2Mjk0MjM3MiwiZXhwIjoxNjYzMDI4NzcyfQ.Q5yrNJSTEYitcAl4h0xkbP3gortnM-aYgO7z6hVG7bc

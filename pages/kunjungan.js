@@ -17,37 +17,40 @@ import { useState,useEffect } from 'react';
 // manipulation
 import getAll from '../manipulation/getAll';
 import search from '../manipulation/search';
-import candaanApi from '../manipulation/candaanApi';
+import motivasiApi from '../manipulation/motivasiAPI';
 
 const Kunjungan = ({user}) => {
     const [kunjungan,setKunjungan] = useState([])
     const [singleKunjungan,setSingleKunjungan] = useState([])
-    const [candaan,setcandaan] = useState({})
+    const [quote,setquote] = useState({})
 
     useEffect(function(){
         getAll(setKunjungan,Cookies.get('token'))
-        candaanApi(Cookies.get('token')).then(q => setcandaan(q))
+        motivasiApi(Cookies.get('token')).then(q => setquote(q))
         const subNav = document.querySelector('.sub-nav')
         modeWeb(subNav,3)
     },[])
 
     useEffect(function(){
-        if(Object.keys(candaan).length){
+        if(Object.keys(quote).length){
             const layarAksi = document.querySelector('.layar-aksi')
-            const candaanTampil = document.querySelector('.candaan')
-            const candaanItalic = candaanTampil.querySelector('i')
-            candaanItalic.textContent = `"${candaan.q}"`
+            const quoteTampil = document.querySelector('.quote')
+            const quoteItalic = quoteTampil.querySelector('i')
+            const textAuthor = quoteTampil.querySelector('p')
+            quoteItalic.textContent = `"${quote.eng}"`
+            quoteItalic.nextElementSibling.textContent = `"${quote.indo}"`
+            textAuthor.textContent = `"${quote.author}"`
 
             layarAksi.classList.remove('hidden')
-            candaanTampil.classList.remove('-translate-y-[120%]')
-            candaanTampil.classList.remove('opacity-0')
+            quoteTampil.classList.remove('-translate-y-[120%]')
+            quoteTampil.classList.remove('opacity-0')
         }
-    },[candaan])
+    },[quote])
 
-    const closeCandaan = () => {
+    const closequote = () => {
         const addForm = document.querySelector('.add-form')
         const layarAksi = document.querySelector('.layar-aksi')
-        const candaanTampil = document.querySelector('.candaan')
+        const quoteTampil = document.querySelector('.quote')
         const detilKunjungan = document.querySelector('.detil-kunjungan')
         const updateKunjungan = document.querySelector('.ubah-kunjungan')
         const deleteKunjungan = document.querySelector('.delete-kunjungan')
@@ -58,8 +61,8 @@ const Kunjungan = ({user}) => {
             }
         }
 
-        candaanTampil.classList.add('-translate-y-[120%]')
-        candaanTampil.classList.add('opacity-0')
+        quoteTampil.classList.add('-translate-y-[120%]')
+        quoteTampil.classList.add('opacity-0')
     }
 
     const tambahKunjungan = () => {
@@ -116,13 +119,13 @@ const Kunjungan = ({user}) => {
         <UpdateForm singleKunjungan={singleKunjungan} setKunjungan={setKunjungan} />
         <section className="layar-aksi hidden transition-all duration-300 ease-linear"></section>
 
-        <section className='candaan py-4 z-30 rounded -translate-y-[120%] opacity-0 transition-all duration-500 bg-white absolute top-2 left-0 right-0 mx-20 sm:mx-52 md:mx-72 lg:mx-[30rem] xl:mx-[38rem]'>
-            <h1 className='text-xl font-bold mb-4 ml-5'>Candaan 🤣🤣</h1>
+        <section className='quote py-4 z-30 rounded -translate-y-[120%] opacity-0 transition-all duration-500 bg-white absolute top-2 left-0 right-0 mx-20 sm:mx-52 md:mx-72 lg:mx-[30rem] xl:mx-[38rem]'>
+            <h1 className='text-xl font-bold mb-4 ml-5'>Quote 😎🔥🔥🔥</h1>
             <hr className='border' />
             <section className='px-6 flex flex-col mt-3'>
-                <blockcandaan><i></i></blockcandaan>
-                <p className='self-end mt-4 font-bold'>Candaan</p>
-                <button className='bg-biru py-1 px-4 rounded text-white self-start' onClick={closeCandaan}>Tutup</button>
+                <blockquote><i></i><i className='block mt-2'></i></blockquote>
+                <p className='self-end mt-4 font-bold'></p>
+                <button className='bg-biru py-1 px-4 rounded text-white self-start' onClick={closequote}>Tutup</button>
             </section>
         </section>
 
