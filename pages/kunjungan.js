@@ -26,19 +26,20 @@ const Kunjungan = ({user}) => {
     const [awalRender,setAwalRender] = useState(0)
 
     useEffect(function(){
-        setAwalRender(function(awalRender){
-            return awalRender + 1
-        })
+        // setAwalRender(function(awalRender){
+        //     return awalRender + 1
+        // })
         getAll(setKunjungan,Cookies.get('token'))
+        candaanApi(Cookies.get('token')).then(q => setcandaan(q))
         const subNav = document.querySelector('.sub-nav')
         modeWeb(subNav,3)
     },[])
 
-    useEffect(function(){
-        if(awalRender === 2){
-            candaanApi(Cookies.get('token')).then(q => setcandaan(q))
-        }
-    },[awalRender])
+    // useEffect(function(){
+    //     if(awalRender === 2){
+    //         candaanApi(Cookies.get('token')).then(q => setcandaan(q))
+    //     }
+    // },[awalRender])
 
 
     useEffect(function(){
