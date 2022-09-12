@@ -36,7 +36,7 @@ const Kunjungan = ({user}) => {
             const layarAksi = document.querySelector('.layar-aksi')
             const candaanTampil = document.querySelector('.candaan')
             const candaanItalic = candaanTampil.querySelector('i')
-            candaanItalic.textContent = `"${candaan.data}"`
+            candaanItalic.textContent = `"${candaan.q}"`
 
             layarAksi.classList.remove('hidden')
             candaanTampil.classList.remove('-translate-y-[120%]')
