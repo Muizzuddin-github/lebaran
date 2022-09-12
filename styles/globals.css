@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.menu-aktif {
+    @apply fixed top-0 right-0 left-0 h-screen z-20;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.user-info-aktif {
+    @apply fixed top-0 right-0 left-0 h-screen z-20;
+    background-color: rgba(0,0,0,0.5);
+}
+.layar-aksi {
+    @apply fixed top-0 right-0 left-0 h-screen z-20;
+    background-color: rgba(0,0,0,0.5);
+}
+.layar-aksi-register {
+    @apply fixed top-0 right-0 left-0 h-screen z-20;
+    background-color: rgba(0,0,0,0.5);
+}
+.layar-aksi-login {
+    @apply fixed top-0 right-0 left-0 h-screen z-20;
+    background-color: rgba(0,0,0,0.5);
+}
+.layar-aksi-reset {
+    @apply fixed top-0 right-0 left-0 h-screen z-20;
+    background-color: rgba(0,0,0,0.5);
+}
