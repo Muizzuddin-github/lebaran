@@ -23,7 +23,7 @@ const MainNavbar = () => {
 
                   <section className="menu-aktif hidden transition-all duration-300 ease-linear cursor-pointer"></section>
 
-                  <ul className="menu w-80 bg-white md:bg-transparent flex justify-evenly items-center fixed right-0 top-16 flex-col h-96 rounded-md z-30 translate-x-full transition-all duration-300 ease-linear md:translate-x-0 md:static md:flex-row md:h-auto md:w-96 md:p-2 dark:bg-biru-dark dark:md:bg-transparent">
+                  <ul className="menu w-60 sm:w-80 bg-white md:bg-transparent flex justify-evenly items-center fixed right-0 top-16 flex-col h-96 rounded-md z-30 translate-x-full transition-all duration-300 ease-linear md:translate-x-0 md:static md:flex-row md:h-auto md:w-96 md:p-2 dark:bg-biru-dark dark:md:bg-transparent">
 
                            <li>
                               <a href="https://github.com/Muizzuddin-github" target="_blank" rel="noreferrer" className="py-2 px-5 text-white bg-biru hover:bg-biru-hover rounded md:bg-transparent md:py-0 menu-list md:hover:bg-transparent">Github</a>

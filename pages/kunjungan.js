@@ -26,7 +26,7 @@ const Kunjungan = ({user}) => {
 
     useEffect(function(){
         getAll(setKunjungan,Cookies.get('token'))
-        motivasiApi(Cookies.get('token')).then(q => setquote(q))
+        // motivasiApi(Cookies.get('token')).then(q => setquote(q))
         const subNav = document.querySelector('.sub-nav')
         modeWeb(subNav,3)
     },[])
@@ -119,10 +119,10 @@ const Kunjungan = ({user}) => {
         <UpdateForm singleKunjungan={singleKunjungan} setKunjungan={setKunjungan} />
         <section className="layar-aksi hidden transition-all duration-300 ease-linear"></section>
 
-        <section className='quote py-4 z-30 rounded -translate-y-[120%] opacity-0 transition-all duration-500 bg-white absolute top-2 left-0 right-0 mx-20 sm:mx-52 md:mx-72 lg:mx-[30rem] xl:mx-[38rem]'>
-            <h1 className='text-xl font-bold mb-4 ml-5'>Quote 😎🔥🔥🔥</h1>
+        <section className='quote py-4 z-30 rounded -translate-y-[120%] opacity-0 transition-all duration-500 bg-white absolute top-0 sm:top-2 left-0 right-0 sm:mx-52 md:mx-72 lg:mx-[30rem] xl:mx-[38rem]'>
+            <h1 className='text-lg sm:text-xl font-bold mb-4 ml-5'>Quote 😎🔥🔥🔥</h1>
             <hr className='border' />
-            <section className='px-6 flex flex-col mt-3'>
+            <section className='px-6 flex flex-col mt-3 text-sm sm:text-base'>
                 <blockquote><i></i><i className='block mt-2'></i></blockquote>
                 <p className='self-end mt-4 font-bold'></p>
                 <button className='bg-biru py-1 px-4 rounded text-white self-start' onClick={closequote}>Tutup</button>
@@ -130,17 +130,17 @@ const Kunjungan = ({user}) => {
         </section>
 
         <main className='overflow-hidden min-h-scree mt-16 pb-[7rem] dark:bg-biru-tua'>
-            <section className='px-7 pb-5 pt-10 flex flex-col items-center'>
-                <section className='p-5 flex justify-between w-full mt-3 mb-2'>
-                    <h1 className='text-[1.8rem] font-bold dark:text-white'>Daftar Kunjungan</h1>
+            <section className='px-4 sm:px-7 pb-5 pt-10 flex flex-col items-center'>
+                <section className='sm:p-5 flex justify-between w-full mt-3 mb-2 flex-wrap'>
+                    <h1 className='text-xl sm:text-[1.8rem] font-bold dark:text-white'>Daftar Kunjungan</h1>
                     <section>
-                        <button className='pt-1 pb-2 px-4 bg-biru hover:bg-biru-hover text-white rounded-lg mr-1 dark:bg-kuning-hitam dark:text-black dark:hover:bg-kuning-hitam-hover' onClick={semua}>Semua</button>
-                        <button className='pt-1 pb-2 px-4 bg-biru hover:bg-biru-hover text-white rounded-lg ml-1  dark:bg-kuning-hitam dark:text-black dark:hover:bg-kuning-hitam-hover' onClick={tambahKunjungan}>Tambah</button>
+                        <button className='text-sm sm:text-base pt-1.5 pb-1.5 sm:pt-1 sm:pb-2 px-4 bg-biru hover:bg-biru-hover text-white rounded-lg mr-1 dark:bg-kuning-hitam dark:text-black dark:hover:bg-kuning-hitam-hover' onClick={semua}>Semua</button>
+                        <button className='text-sm sm:text-base pt-1.5 pb-1.5 sm:pt-1 sm:pb-2 px-4 bg-biru hover:bg-biru-hover text-white rounded-lg ml-1  dark:bg-kuning-hitam dark:text-black dark:hover:bg-kuning-hitam-hover' onClick={tambahKunjungan}>Tambah</button>
                     </section>
                 </section>
-                <section className='w-2/3 relative'>
+                <section className='w-full sm:w-2/3 relative'>
                     <i className="fa-solid fa-magnifying-glass absolute top-[2.7rem] left-4 text-xl"></i>
-                    <input type="text" placeholder='cari'  className='text-md w-full h-12 mt-8 rounded-3xl pl-14 shadow-cari outline-none focus:shadow-cari-fokus' onKeyDown={inputEnter}/>
+                    <input type="text" placeholder='cari'  className=' w-full h-12 mt-8 rounded-3xl pl-14 shadow-cari outline-none focus:shadow-cari-fokus' onKeyDown={inputEnter}/>
                 </section>
             </section>
             <section className='container my-10 mx-auto px-5 py-6 md:py-10 flex justify-around items-center flex-wrap'>

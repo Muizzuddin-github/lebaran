@@ -61,20 +61,45 @@ const Delete = ({singleKunjungan,setKunjungan}) => {
     }
 
     return ( 
-            <section className="delete-kunjungan hidden mx-20 sm:mx-48 md:mx-64 lg:mx-0 px-5 py-6 fixed z-30 bg-white right-0 left-0 lg:left-1/3 top-1/3 lg:right-1/3 rounded-md text-xl dark:text-white dark:bg-biru-dark dark:shadow-popup">
-            <h2 className="text-2xl mb-2">Kunjungan</h2>
+            <section className="delete-kunjungan hidden px-5 py-6 fixed z-30 bg-white top-1/3 mx-5 left-0 right-0 sm:mx-52 md:mx-72 lg:mx-[30rem] xl:mx-[38rem] rounded-md text-lg sm:text-xl dark:text-white dark:bg-biru-dark dark:shadow-popup">
+            <h2 className="text-lg sm:text-2xl mb-2">Kunjungan</h2>
             <section key={id}>
-                            <ul className="mb-5 dark:text-white pl-16 pr-10">
-                            <li className="mb-2">Nama <p className="ml-5 mr-2 inline-block">:</p>{nama}</li>
-                            <li className="mb-2">Alamat <p className="ml-3 mr-2 inline-block">:</p>{alamat}</li>
-                            <li className="mb-2">No HP <p className="ml-4 mr-2 inline-block">:</p>{noHP}</li>
-                            <li className="mb-2">Status <p className="ml-5 mr-2 inline-block">:</p>{status}</li>
-                            <li>Tanggal <p className="ml-2 mr-2 inline-block">:</p>{tanggal}</li>
+                            <ul className="mb-5 dark:text-white pl-5 sm:pl-16 text-base sm:text-lg">
+                            <li className="mb-2 flex w-full">Nama 
+                                <p className="ml-6 mr-2 inline-block">:</p>
+                                    <section className="break-words w-2/3">
+                                        <p>{nama}</p>
+                                    </section>
+                                </li>
+                                <li className="mb-2 flex w-full">Alamat
+                                    <p className="ml-4 mr-2 inline-block">:</p>
+                                    <section className="break-words w-2/3">
+                                        <p>{alamat}</p>
+                                    </section>
+                                </li>
+                                <li className="mb-2 flex w-full">No HP
+                                    <p className="ml-5 mr-2 inline-block">:</p>
+                                    <section className="break-words w-2/3">
+                                        <p>{noHP}</p>
+                                    </section>
+                                </li>
+                                <li className="mb-2 flex w-full">Status
+                                    <p className="ml-5 mr-2 sm:ml-6 inline-block">:</p>
+                                    <section className="break-words w-2/3">
+                                        <p>{status}</p>
+                                    </section>
+                                </li>
+                                <li className="flex w-full" >Tanggal 
+                                    <p className="ml-2 mr-2 sm:ml-3 inline-block">:</p>
+                                    <section className="break-words w-2/3">
+                                        <p>{tanggal}</p>
+                                    </section>
+                                </li>
                             </ul>
-                            <p className="text-abu-abu mt-7 ml-16">hapus kunjungan?</p>
+                            <p className="text-abu-abu mt-6 ml-5 text-base sm:text-lg sm:ml-16">hapus kunjungan?</p>
                             <section className="w-full flex justify-end items-center mt-2">
-                                <section className="tombol text-white text-lg flex">
-                                    <button className="py-1 px-3 bg-biru hover:bg-biru-hover rounded-md mr-8" onClick={() => hapusData(id)}>hapus</button>
+                                <section className="tombol text-white flex text-sm sm:text-lg">
+                                    <button className="py-1 px-4 bg-biru hover:bg-biru-hover rounded-md mr-8" onClick={() => hapusData(id)}>hapus</button>
                                     <p className="text-abu-abu hidden mr-8"></p>
                                     <button type="button" className="py-1 px-3 bg-sal hover:bg-sal-hover rounded-md inline-block cursor-pointer" onClick={close}>tidak</button>
                                 </section>

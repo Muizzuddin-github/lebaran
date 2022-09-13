@@ -39,8 +39,8 @@ const Navbar = ({user}) => {
                                  </li>
                                  <li className="relative p-5 md:p-0">
 
-                                    <section className="user rounded-full bg-white w-15 h-15 md:w-10 md:h-10 absolute -top-2 -left-2 flex justify-center items-center cursor-pointer peer md:-top-5 md:-left-7" onClick={infoUser}>
-                                       <p className="text-user text-2xl font-bold text-black">{name[0].toUpperCase()}</p>
+                                    <section className="user rounded-full bg-biru md:bg-white w-15 h-15 md:w-10 md:h-10 absolute -top-2 -left-2 flex justify-center items-center cursor-pointer peer md:-top-5 md:-left-7" onClick={infoUser}>
+                                       <p className="text-user text-2xl font-bold text-white md:text-biru dark:md:text-biru-dark">{name[0].toUpperCase()}</p>
                                     </section>
                                  </li>
                         </ul>
@@ -55,20 +55,24 @@ const Navbar = ({user}) => {
                                        <button className="text-white m-auto block py-1 px-5 bg- rounded-sm mt-4 hover:bg-biru-tua" onClick={tombolHapusAkun}>Hapus akun</button>
                                     </section>
                         <AlertAuth />
-                        <section className="hapus-akun dark:bg-biru-dark bg-white fixed z-20 top-72 rounded shadow-cari left-0 right-0 mx-20 -translate-x-[180%] opacity-0 transition-all duration-300 sm:mx-52 md:mx-72 lg:mx-[30rem] xl:mx-[40rem]">
-                           <h1 className="mt-2 ml-4 text-lg font-bold text-red-600 dark:text-white mb-2">Peringatan 😢</h1>
+                        <section className="hapus-akun dark:bg-biru-dark bg-white fixed z-20 rounded shadow-cari -translate-x-[180%] opacity-0 transition-all duration-300 top-1/3 mx-5 left-0 right-0 sm:mx-52 md:mx-72 lg:mx-[30rem] xl:mx-[38rem]">
+                           <h1 className="mt-2 ml-4 text-lg sm:text-xl font-bold text-red-600 dark:text-white mb-2">Peringatan 😢</h1>
                            <hr />
-                           <section className="p-5 flex flex-col dark:text-white">
+                           <section className="p-5 flex flex-col dark:text-white text-base sm:text-lg">
    
-                              <section className="break-words w-80 mb-2">
-                                 <p className="inline-block">Nama</p>
-                                 <p className="ml-6 mr-4 inline-block">:</p>
-                                 <p className="break-words inline-block">{user.nama}</p>
+                              <section className="w-80 mb-2 flex">
+                                 <p>Nama</p>
+                                 <p className="ml-6 mr-4">:</p>
+                                 <section className="break-words w-2/3 inline-block">
+                                     <p>{user.nama}</p>
+                                 </section>
                               </section>
-                              <section className="break-words w-80 mb-2">
-                                 <p className="inline-block">Email</p>
-                                 <p className="ml-7 mr-4 inline-block">:</p>
-                                 <p className="break-words inline-block">{user.email}</p>
+                              <section className="w-80 mb-2 flex">
+                                 <p>Email</p>
+                                 <p className="ml-7 mr-4">:</p>
+                                 <section className="break-words w-2/3 inline-block">
+                                     <p>{user.email}</p>
+                                 </section>
                               </section>
                               <hr />
                               <section className="w-80 mt-2 mb-2">
@@ -77,8 +81,8 @@ const Navbar = ({user}) => {
                                  <p className="break-words text-sm ml-2 text-abu-abu dark:text-white">jika anda menghapus akun anda maka daftar kunjungan anda akan ikut terhapus semua</p>
                               </section>
                               <section className="self-end mt-3">
-                                 <button className="py-1 px-4 bg-biru text-white rounded-md mr-1 text-sm" onClick={tombolAkunDihapus}>Hapus</button>
-                                 <button className="py-1 px-4 text-white bg-sal rounded-md ml-1 text-sm"  onClick={tombolTutupPeringatanHapusAkun}>Tidak</button>
+                                 <button className="py-1 px-4 bg-biru text-white rounded-md mr-1 text-sm sm:text-base" onClick={tombolAkunDihapus}>Hapus</button>
+                                 <button className="py-1 px-4 text-white bg-sal rounded-md ml-1 text-sm sm:text-base"  onClick={tombolTutupPeringatanHapusAkun}>Tidak</button>
                               </section>
                            </section>
                         </section>

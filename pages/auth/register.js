@@ -9,6 +9,7 @@ import authRedirect from '../../funcAuth/authRedirect';
 import { useEffect,useState } from 'react';
 import {authRegister} from '../../manipulation/auth/authentication'
 import { checkStrength } from '@password-generator/check-strength';
+import FontAwesome from 'react-fontawesome';
 
 const Register = () => {
     const [nama,setNama] = useState('')
@@ -125,28 +126,28 @@ const Register = () => {
     <AlertAuth />
         <section className="menu-register p-5 absolute top-0 bottom-0 right-0 left-0 z-10 flex items-center justify-center ">
             <section className="layar-aksi-register hidden transition-all duration-300 ease-linear" onClick={closeErrPemberitahuan}></section>
-            <form className="register opacity-0 animate-authMuncul py-6 px-10 bg-white rounded-md text-xl dark:text-white dark:bg-biru-dark dark:shadow-popup" onSubmit={register}>
-                <h1 className="text-2xl mb-6 text-center">Buat akun anda</h1>
+            <form className="register opacity-0 animate-authMuncul py-6 px-6 sm:px-10 bg-white rounded-md text-xl dark:text-white dark:bg-biru-dark dark:shadow-popup" onSubmit={register}>
+                <h1 className="sm:text-2xl mb-6 text-center">Buat akun anda</h1>
                 <section className='h-40 flex flex-col justify-between'>
                     <section className="flex justify-between items-center p-1 w-full">
-                        <label htmlFor="nama">Nama <p className="ml-9 mr-4 inline-block">:</p></label>
-                        <input type="text" placeholder="nama" className="border dark:border-abu-trans w-2/3 block pl-2 outline-none rounded-sm text-lg dark:bg-transparent" id="nama" autoComplete='off' required autoFocus defaultValue={nama} onChange={e => setNama(e.target.value)}/>
+                        <label htmlFor="nama" className='text-base sm:text-xl'>Nama <p className="mr-1 ml-9 sm:mr-4 inline-block">:</p></label>
+                        <input type="text" placeholder="nama" className="border dark:border-abu-trans w-2/3 block pl-2 outline-none rounded-sm text-sm py-1 sm:py-0 sm:text-lg dark:bg-transparent" id="nama" autoComplete='off' required autoFocus defaultValue={nama} onChange={e => setNama(e.target.value)}/>
                     </section>
                     <section className="flex justify-between items-center p-1 w-full">
-                        <label htmlFor="email">Email <p className="ml-10 mr-2 inline-block">:</p></label>
-                        <input type="email" placeholder="email" className="border dark:border-abu-trans w-2/3 block pl-2 outline-none rounded-sm text-lg dark:bg-transparent" id="email" required defaultValue={email} onChange={e => setEmail(e.target.value)} />
+                        <label htmlFor="email" className='text-base sm:text-xl'>Email <p className="ml-10 mr-2 inline-block">:</p></label>
+                        <input type="email" placeholder="email" className="border dark:border-abu-trans w-2/3 block pl-2 outline-none rounded-sm text-sm py-1 sm:py-0 sm:text-lg dark:bg-transparent" id="email" required defaultValue={email} onChange={e => setEmail(e.target.value)} />
                     </section>
                     <section className="flex justify-between items-center p-1 w-full">
-                        <label htmlFor="password" className='flex'>Password <p className="ml-3 mr-5 inline-block">:</p></label>
+                        <label htmlFor="password" className='flex text-base sm:text-xl'>Password <p className="ml-3 mr-3 sm:mr-5 inline-block">:</p></label>
                         <section className='w-full flex justify-between items-center border dark:border-abu-trans'>
-                            <input type="password" placeholder="min 5 karakter" className="w-[85%] block pl-2 outline-none rounded-sm text-lg dark:bg-transparent" id="password" required defaultValue={password} onChange={e => setPassword(e.target.value)}/>
-                            <i className="fa-solid fa-eye text-gray-400 mr-2 cursor-pointer" onClick={iconMata}></i>
+                            <input type="password" placeholder="min 5 karakter" className="w-[85%] block pl-2 outline-none rounded-sm text-sm py-1 sm:py-0 sm:text-lg dark:bg-transparent" id="password" required defaultValue={password} onChange={e => setPassword(e.target.value)}/>
+                            <FontAwesome className="fa-solid fa-eye text-lg sm:text-xl text-gray-400 mr-2 cursor-pointer" name='' onClick={iconMata}></FontAwesome>
                         </section>
                     </section>
-                    <p className='ml-32 status-password text-sm'></p>
+                    <p className='ml-32 status-password text-[0.785rem] sm:text-sm'></p>
                 </section>
-                <button className="py-2 w-full bg-biru rounded hover:bg-biru-hover dark:bg-biru-tua dark:hover:bg-biru-hover text-white mt-6 mb-2" type="submit">buat akun</button>
-                <Link href={'/auth/login'}><a className='text-sm '>Kembali ke Login</a></Link>
+                <button className="py-1.5 sm:py-2 w-full bg-biru rounded hover:bg-biru-hover dark:bg-biru-tua dark:hover:bg-biru-hover text-white mt-6 mb-2 text-lg" type="submit">buat akun</button>
+                <Link href={'/auth/login'}><a className='text-[0.785rem] sm:text-sm'>Kembali ke Login</a></Link>
             </form>
         </section>
     </> 

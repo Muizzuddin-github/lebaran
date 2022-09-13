@@ -24,6 +24,9 @@ const resetPasswod = async (req,res) => {
 
 
     }catch(err){
+        if(err.message === 'jwt expired'){
+            return res.status(400).json({msg : 'Token kadaluarsa klik lupa password lagi'})
+        }
         return res.status(400).json({msg : err.message})
     }
 }
