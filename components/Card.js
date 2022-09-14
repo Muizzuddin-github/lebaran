@@ -11,7 +11,7 @@ const Card = ({orang,setSingleKunjungan}) => {
             const hitam = document.querySelector('.layar-aksi')
             hitam.classList.remove('hidden')
             const ubahKunjungan =  document.querySelector('.ubah-kunjungan')
-            const pFormUbahKunjungan = ubahKunjungan.querySelector('.tombol p')
+            const pFormUbahKunjungan = ubahKunjungan.querySelector('.tombol .text-berhasil-ubah')
 
             pFormUbahKunjungan.classList.add('hidden')
             pFormUbahKunjungan.previousElementSibling.classList.remove('hidden')

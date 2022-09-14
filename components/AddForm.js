@@ -3,6 +3,7 @@ import addData from "../manipulation/addData"
 import getAll from "../manipulation/getAll"
 import camelCase from "../setting-website/camelCase"
 import Cookies from "js-cookie"
+import FontAwesome from "react-fontawesome"
 
 const AddForm = ({setKunjungan}) => {
     const [nama,setNama] = useState('')
@@ -13,6 +14,18 @@ const AddForm = ({setKunjungan}) => {
     
     const tambah = async (e) => {
         e.preventDefault()
+        const tombolTambah = document.querySelector('.add-form .tombol-submit')
+        const textTambah = tombolTambah.querySelector('p')
+        const iconLoading = tombolTambah.querySelector('.fa-solid')
+        const pemberitahuanError = document.querySelector('.add-form .err')
+        const ditambahkan = document.querySelector('.add-form .tombol .kt')
+
+        if(!iconLoading.classList.contains('hidden')){
+            return
+        }
+        textTambah.classList.add('hidden')
+        iconLoading.classList.remove('hidden')
+
         try{
 
             const data = {
@@ -23,19 +36,24 @@ const AddForm = ({setKunjungan}) => {
                 status : camelCase(status)
             }
             const hasil = await addData(data,Cookies.get('token'))
-    
-            const ditambahkan = document.querySelector('.add-form .tombol .kt')
-            const pemberitahuanError = document.querySelector('.add-form .err')
-            ditambahkan.previousElementSibling.classList.add('hidden')
-            ditambahkan.textContent = hasil.data.msg
-            ditambahkan.classList.remove('hidden')
-            ditambahkan.nextElementSibling.textContent = 'tutup'
-            pemberitahuanError.textContent = ''
-    
-            getAll(setKunjungan,Cookies.get('token'))
+
+            setTimeout(function(){
+                textTambah.classList.remove('hidden')
+                iconLoading.classList.add('hidden')
+                ditambahkan.previousElementSibling.classList.add('hidden')
+                ditambahkan.textContent = hasil.data.msg
+                ditambahkan.classList.remove('hidden')
+                ditambahkan.nextElementSibling.textContent = 'tutup'
+                pemberitahuanError.textContent = ''
+                getAll(setKunjungan,Cookies.get('token'))
+
+            },300)
         }catch(err){
-            const pemberitahuanError = document.querySelector('.add-form .err')
-            pemberitahuanError.textContent = err.response.data.msg
+            setTimeout(function(){
+                textTambah.classList.remove('hidden')
+                iconLoading.classList.add('hidden')
+                pemberitahuanError.textContent = err.response.data.msg
+            },500)
 
         }
     }
@@ -44,6 +62,12 @@ const AddForm = ({setKunjungan}) => {
         const quote = document.querySelector('.quote')
         const addForm = document.querySelector('.add-form')
         const layarAksi = document.querySelector('.layar-aksi')
+        const iconLoading = document.querySelector('.add-form .tombol-submit .fa-solid')
+
+        if(!iconLoading.classList.contains('hidden')){
+            return
+        }
+
         addForm.classList.add('hidden')
 
         if(quote.classList.contains('opacity-0')){
@@ -83,9 +107,12 @@ const AddForm = ({setKunjungan}) => {
             </section>
             <p className="text-abu-abu mt-7 text-base sm:text-lg">tambah kunjungan?</p>
             <section className="w-full flex justify-between items-center mt-2">
-                <p className="err text-abu-abu"></p>
+                <p className="err text-red-400 text-base sm:text-lg"></p>
                 <section className="tombol text-white text-sm sm:text-lg flex">
-                    <button className="py-1 px-3 bg-biru rounded-md mr-8" type="submit">tambah</button>
+                    <button className="py-1 px-3 bg-biru rounded-md mr-8 tombol-submit" type="submit">
+                        <p>tambah</p>
+                        <FontAwesome className="hidden fa-solid fa-spinner animate-iconBerputar" name=""></FontAwesome>
+                    </button>
                     <p className="kt text-abu-abu hidden mr-8"></p>
                     <button type="button" className="py-1 px-3 bg-sal rounded-md inline-block cursor-pointer" onClick={close}></button>
                 </section>

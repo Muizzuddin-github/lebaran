@@ -81,7 +81,8 @@ export default async function handler(req, res) {
     const data = await Status.aggregate([
       {$match : {id_user : id}},
       {$unwind : "$kunjungan"},
-      {$project : {_id : 0,id_user : 0}}
+      {$project : {_id : 0,id_user : 0}},
+      {$sort : {'kunjungan.tanggal' : -1,'kunjungan.nama' : 1}}
     ])
 
     return res.status(200).json({jumlahData : data.length,data})

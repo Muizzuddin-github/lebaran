@@ -56,17 +56,31 @@ const Register = () => {
         const iconPemberitahuan = pemberitahuan.querySelector('.fa-solid')
 
         try{
-           const {data} = await authRegister({nama,email,password})
-           iconPemberitahuan.classList.remove('text-sal')
-           iconPemberitahuan.classList.remove('fa-circle-xmark')
-           iconPemberitahuan.classList.add('fa-circle-check')
-           iconPemberitahuan.classList.add('text-biru')
-           iconPemberitahuan.nextElementSibling.textContent = data.msg
 
-           layarAksiRegister.classList.remove('hidden')
-           layarAksiRegister.classList.remove('cursor-pointer')
-           pemberitahuan.classList.remove('opacity-0')
-           pemberitahuan.classList.remove('-translate-y-full')
+            iconPemberitahuan.classList.remove('text-sal')
+            iconPemberitahuan.classList.remove('fa-circle-xmark')
+            iconPemberitahuan.classList.remove('fa-circle-check')
+            iconPemberitahuan.classList.add('fa-rotate')
+            iconPemberitahuan.classList.add('animate-iconBerputar')
+            
+            iconPemberitahuan.classList.add('text-biru')
+            iconPemberitahuan.nextElementSibling.textContent = 'Tunggu sebentar'
+            
+            layarAksiRegister.classList.remove('hidden')
+            layarAksiRegister.classList.remove('cursor-pointer')
+            pemberitahuan.classList.remove('opacity-0')
+            pemberitahuan.classList.remove('-translate-y-full')
+
+
+           const {data} = await authRegister({nama,email,password})
+
+           setTimeout(function(){
+            layarAksiRegister.classList.add('cursor-pointer')
+            iconPemberitahuan.classList.remove('fa-rotate')
+            iconPemberitahuan.classList.remove('animate-iconBerputar')
+            iconPemberitahuan.classList.add('fa-circle-check')
+            iconPemberitahuan.nextElementSibling.textContent = data.msg
+           },1000)
 
            setNama('')
            setEmail('')
@@ -77,14 +91,20 @@ const Register = () => {
            },1700)
 
         }catch({response}){
-            iconPemberitahuan.classList.add('fa-circle-xmark')
-            iconPemberitahuan.classList.add('text-sal')
-            iconPemberitahuan.nextElementSibling.textContent = response.data.msg
-
-            layarAksiRegister.classList.remove('hidden')
-            layarAksiRegister.classList.add('cursor-pointer')
-            pemberitahuan.classList.remove('opacity-0')
-            pemberitahuan.classList.remove('-translate-y-full')
+            layarAksiRegister.classList.remove('cursor-pointer')
+            setTimeout(function(){
+                iconPemberitahuan.classList.remove('fa-rotate')
+                iconPemberitahuan.classList.remove('animate-iconBerputar')
+                iconPemberitahuan.classList.remove('text-biru')
+                iconPemberitahuan.classList.add('fa-circle-xmark')
+                iconPemberitahuan.classList.add('text-sal')
+                iconPemberitahuan.nextElementSibling.textContent = response.data.msg
+    
+                layarAksiRegister.classList.remove('hidden')
+                layarAksiRegister.classList.add('cursor-pointer')
+                pemberitahuan.classList.remove('opacity-0')
+                pemberitahuan.classList.remove('-translate-y-full')
+            },1500)
         }
 
     }

@@ -2,6 +2,7 @@ import deleteSingle from "../manipulation/deleteSingle"
 import getAll from "../manipulation/getAll"
 import Cookies from "js-cookie"
 import { useState,useEffect } from "react"
+import FontAwesome from "react-fontawesome"
 
 const Delete = ({singleKunjungan,setKunjungan}) => {
     const [id,setID] = useState(0)
@@ -27,16 +28,40 @@ const Delete = ({singleKunjungan,setKunjungan}) => {
 
 
     const hapusData = async (id) => {
+        const tombolHapus = document.querySelector('.delete-kunjungan .tombol .tombol-hapus')
+        const textTombolHapus = tombolHapus.querySelector('.text-hapus')
+        const iconTombolHapus = tombolHapus.querySelector('.fa-solid')
+        const textErr = document.querySelector('.delete-kunjungan .err')
+        const p = document.querySelector('.delete-kunjungan .tombol .berhasil-dihapus')
+        
+        if(!iconTombolHapus.classList.contains('hidden')){
+            return
+        }
+
+        textTombolHapus.classList.add('hidden')
+        iconTombolHapus.classList.remove('hidden')
+
         try{
-            const p = document.querySelector('.delete-kunjungan .tombol p')
             const text = await deleteSingle(id,Cookies.get('token'))
-            p.textContent = text
-            p.previousElementSibling.classList.add('hidden')
-            p.classList.remove('hidden')
-            p.nextElementSibling.textContent = 'tutup'
-            await getAll(setKunjungan,Cookies.get('token'))
+
+            setTimeout(function(){
+                textTombolHapus.classList.remove('hidden')
+                iconTombolHapus.classList.add('hidden')
+                textErr.textContent = ''
+                p.textContent = text
+                p.previousElementSibling.classList.add('hidden')
+                p.classList.remove('hidden')
+                p.nextElementSibling.textContent = 'tutup'
+                getAll(setKunjungan,Cookies.get('token'))
+                
+            },300)
+
         }catch(err){
-            console.log(err)
+            setTimeout(function(){
+                textTombolHapus.classList.remove('hidden')
+                iconTombolHapus.classList.add('hidden')
+                textErr.textContent = err.response.data.msg
+            },500)
         }
     }
 
@@ -44,10 +69,16 @@ const Delete = ({singleKunjungan,setKunjungan}) => {
         const deleteKunjungan = document.querySelector('.delete-kunjungan')
         const layarAksi = document.querySelector('.layar-aksi')
         const quoteTampil = document.querySelector('.quote')
+        const tombolHapus = document.querySelector('.delete-kunjungan .tombol .tombol-hapus')
+        const iconTombolHapus = tombolHapus.querySelector('.fa-solid')
 
         if(!quoteTampil.classList.contains('opacity-0')){
             quoteTampil.classList.add('-translate-y-[120%]')
             quoteTampil.classList.add('opacity-0')
+        }
+
+        if(!iconTombolHapus.classList.contains('hidden')){
+            return
         }
 
         deleteKunjungan.classList.add('hidden')
@@ -97,10 +128,14 @@ const Delete = ({singleKunjungan,setKunjungan}) => {
                                 </li>
                             </ul>
                             <p className="text-abu-abu mt-6 ml-5 text-base sm:text-lg sm:ml-16">hapus kunjungan?</p>
-                            <section className="w-full flex justify-end items-center mt-2">
+                            <section className="w-full flex justify-between items-center mt-2">
+                                <p className="err text-red-400 ml-16 text-base sm:text-lg"></p>
                                 <section className="tombol text-white flex text-sm sm:text-lg">
-                                    <button className="py-1 px-4 bg-biru hover:bg-biru-hover rounded-md mr-8" onClick={() => hapusData(id)}>hapus</button>
-                                    <p className="text-abu-abu hidden mr-8"></p>
+                                    <button className="py-1 px-4 bg-biru hover:bg-biru-hover rounded-md mr-8 tombol-hapus" onClick={() => hapusData(id)}>
+                                        <p className="text-hapus">hapus</p>
+                                        <FontAwesome className="hidden fa-solid fa-spinner animate-iconBerputar" name=""></FontAwesome>
+                                    </button>
+                                    <p className="text-abu-abu hidden mr-8 berhasil-dihapus"></p>
                                     <button type="button" className="py-1 px-3 bg-sal hover:bg-sal-hover rounded-md inline-block cursor-pointer" onClick={close}>tidak</button>
                                 </section>
                             </section>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import updateData from "../manipulation/updateData"
 import getAll from "../manipulation/getAll"
 import Cookies from "js-cookie"
+import FontAwesome from "react-fontawesome"
 
 const UpdateForm = ({singleKunjungan,setKunjungan}) => {
     const [id,setID] = useState(0)
@@ -24,19 +25,41 @@ const UpdateForm = ({singleKunjungan,setKunjungan}) => {
     
     const ubah = async (e) => {
         e.preventDefault()
+        const tombolUbah = document.querySelector('.ubah-kunjungan .tombol .tombol-ubah')
+        const textTombolUbah = tombolUbah.querySelector('.text-ubah')
+        const iconTombolUbah = tombolUbah.querySelector('.fa-solid')
+        const textErr = document.querySelector('.ubah-kunjungan .err')
+        const ditambahkan = document.querySelector('.ubah-kunjungan .tombol .text-berhasil-ubah')
+
+        if(!iconTombolUbah.classList.contains('hidden')){
+            return
+        }
+
+        textTombolUbah.classList.add('hidden')
+        iconTombolUbah.classList.remove('hidden')
+
         try{
             const data = {nama,alamat,noHP,tanggal,status}
             const text = await updateData(id,data,Cookies.get('token'))
+
+            setTimeout(function(){
+                textTombolUbah.classList.remove('hidden')
+                iconTombolUbah.classList.add('hidden')
+                textErr.textContent = ''
+                ditambahkan.previousElementSibling.classList.add('hidden')
+                ditambahkan.textContent = text
+                ditambahkan.classList.remove('hidden')
+                ditambahkan.nextElementSibling.textContent = 'tutup'
+                getAll(setKunjungan,Cookies.get('token'))
+            },300)
     
-            const ditambahkan = document.querySelector('.ubah-kunjungan .tombol p')
-            ditambahkan.previousElementSibling.classList.add('hidden')
-            ditambahkan.textContent = text
-            ditambahkan.classList.remove('hidden')
-            ditambahkan.nextElementSibling.textContent = 'tutup'
-    
-            getAll(setKunjungan,Cookies.get('token'))
         }catch(err){
-            console.log(err)
+            setTimeout(function(){    
+                textTombolUbah.classList.remove('hidden')
+                iconTombolUbah.classList.add('hidden')
+                textErr.textContent = err.response.data.msg
+            },500)
+
         }
     }
 
@@ -44,13 +67,20 @@ const UpdateForm = ({singleKunjungan,setKunjungan}) => {
         const updateForm = document.querySelector('.ubah-kunjungan')
         const layarAksi = document.querySelector('.layar-aksi')
         const quoteTampil = document.querySelector('.quote')
+        const textErr = document.querySelector('.ubah-kunjungan .err')
+        const tombolUbah = document.querySelector('.ubah-kunjungan .tombol .tombol-ubah')
+        const iconTombolUbah = tombolUbah.querySelector('.fa-solid')
 
         if(!quoteTampil.classList.contains('opacity-0')){
             quoteTampil.classList.add('-translate-y-[120%]')
             quoteTampil.classList.add('opacity-0')
         }
 
+        if(!iconTombolUbah.classList.contains('hidden')){
+            return
+        }
 
+        textErr.textContent = ''
         updateForm.classList.add('hidden')
         layarAksi.classList.add('hidden')
 
@@ -87,10 +117,14 @@ const UpdateForm = ({singleKunjungan,setKunjungan}) => {
                 <input type="text" placeholder="status" className="border w-2/3 block pl-2 outline-none rounded-sm dark:bg-transparent text-sm sm:text-lg py-1 sm:py-0 dark:border-abu-trans" id="status" required onChange={e => setStatus(e.target.value)} value={status}/>
             </section>
             <p className="text-abu-abu mt-7 text-base sm:text-lg">ubah kunjungan?</p>
-            <section className="w-full flex justify-end items-center mt-2">
+            <section className="w-full flex justify-between items-center mt-2">
+                <p className="err text-red-400 text-base sm:text-lg"></p>
                 <section className="tombol text-white text-sm sm:text-lg flex">
-                    <button className="py-1 px-3 bg-biru hover:bg-biru-hover rounded-md mr-8" type="submit">ubah</button>
-                    <p className="text-abu-abu hidden mr-8"></p>
+                    <button className="py-1 px-3 bg-biru hover:bg-biru-hover rounded-md mr-8 tombol-ubah" type="submit">
+                    <p className="text-ubah">ubah</p>
+                    <FontAwesome className="hidden fa-solid fa-spinner animate-iconBerputar" name=""></FontAwesome>
+                    </button>
+                    <p className="text-berhasil-ubah text-abu-abu hidden mr-8"></p>
                     <button type="button" className="py-1 px-3 bg-sal hover:bg-sal-hover rounded-md inline-block cursor-pointer" onClick={close}></button>
                 </section>
             </section>
