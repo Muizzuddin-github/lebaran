@@ -75,7 +75,6 @@ const Register = () => {
            const {data} = await authRegister({nama,email,password})
 
            setTimeout(function(){
-            layarAksiRegister.classList.add('cursor-pointer')
             iconPemberitahuan.classList.remove('fa-rotate')
             iconPemberitahuan.classList.remove('animate-iconBerputar')
             iconPemberitahuan.classList.add('fa-circle-check')

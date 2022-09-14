@@ -26,7 +26,7 @@ const Kunjungan = ({user}) => {
 
     useEffect(function(){
         getAll(setKunjungan,Cookies.get('token'))
-        // motivasiApi(Cookies.get('token')).then(q => setquote(q))
+        motivasiApi(Cookies.get('token')).then(q => setquote(q))
         const subNav = document.querySelector('.sub-nav')
         modeWeb(subNav,3)
     },[])
