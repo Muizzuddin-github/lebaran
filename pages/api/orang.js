@@ -15,18 +15,6 @@ export default async function handler(req, res) {
     try{
 
       const {nama,alamat,noHP,tanggal,status} = req.body
-      const checkStatus = await Status.findOne({id_user : id,status})
-
-      if(!checkStatus){
-        const tambahStatus = new Status({
-          status : status,
-          id_user : id,
-          kunjungan : []
-        })
-
-        await tambahStatus.save()
-      }
-
 
       const checkKunjungan = await Status.aggregate([
         {$unwind : '$kunjungan'},
@@ -61,6 +49,21 @@ export default async function handler(req, res) {
         
         }
       }
+
+
+      const checkStatus = await Status.findOne({id_user : id,status})
+
+      if(!checkStatus){
+        const tambahStatus = new Status({
+          status : status,
+          id_user : id,
+          kunjungan : []
+        })
+
+        await tambahStatus.save()
+      }
+
+
 
       const kunjungan = await Status.updateOne({id_user : id,status},{
         $push : {
