@@ -181,6 +181,11 @@ export async function getServerSideProps(context){
         const {id} = jwt.verify(token,process.env.SECRET_LOGIN)
         const ambilUser = await Users.findOne({_id : id})
         if(!ambilUser){
+            context.res.setHeader(
+                "Set-Cookie",[
+                    "token=deleted; Max-Age=0"
+                ]
+            )
             return {
                 redirect : {
                     permanent : false,
@@ -193,6 +198,11 @@ export async function getServerSideProps(context){
         user.email = ambilUser.email
 
     }catch(err){
+        context.res.setHeader(
+            "Set-Cookie",[
+                "token=deleted; Max-Age=0"
+            ]
+        )
         return {
             redirect : {
                 permanent : false,
