@@ -7,14 +7,16 @@ export default async function handler(req, res) {
   // check token, check schema token
   const {id} = await authorization(res,process.env.SECRET_LOGIN,req.headers.authorization)
 
+  // check email ada atau tidak
   const check = await Users.findOne({_id : id})
-
   if(!check) return res.status(401).json({msg : 'anda belum melakukan registrasi'})
 
   if(req.method === 'POST'){
     try{
 
       const {nama,alamat,noHP,tanggal,status} = req.body
+
+      // check kunjungan sudah ada atau tidak
 
       const checkKunjungan = await Status.aggregate([
         {$unwind : '$kunjungan'},
@@ -30,6 +32,8 @@ export default async function handler(req, res) {
       if(checkKunjungan.length != 0){
         throw new Error('data sudah ada')
       }
+
+      // check duplikat no hp
 
       const checkKunjunganUnique = await Status.aggregate([
         {$unwind : '$kunjungan'},
@@ -51,6 +55,8 @@ export default async function handler(req, res) {
       }
 
 
+      // check status ada atau tidak kalo ga ada kita tambah
+
       const checkStatus = await Status.findOne({id_user : id,status})
 
       if(!checkStatus){
@@ -63,6 +69,8 @@ export default async function handler(req, res) {
         await tambahStatus.save()
       }
 
+
+      // tambahkan kunjungan ke array status
 
 
       const kunjungan = await Status.updateOne({id_user : id,status},{
@@ -81,6 +89,9 @@ export default async function handler(req, res) {
 
 
   try{
+
+    // ambil semua kunjungan dan di aggregate
+
     const data = await Status.aggregate([
       {$match : {id_user : id}},
       {$unwind : "$kunjungan"},

@@ -12,7 +12,10 @@ const singleData = async (req,res) => {
   
 
     try{
+
         if(req.method === 'GET'){
+
+            // ambil single data sesuai dengan query params
             const data = await Status.aggregate([
                 {$match : {id_user : id}},
                 {$unwind : "$kunjungan"},
@@ -24,8 +27,9 @@ const singleData = async (req,res) => {
             return res.status(200).json({data})
         }else if(req.method === 'PUT'){
 
-
-            const {nama,alamat,noHP,tanggal,status} = req.body            
+            const {nama,alamat,noHP,tanggal,status} = req.body       
+            
+            // check apakah kunjungan ada atau tidak
             const checkUserKunjungan = await Status.aggregate([
                 {$unwind : "$kunjungan"},
                 {$match : {id_user : id}},
@@ -34,6 +38,7 @@ const singleData = async (req,res) => {
 
             if(!checkUserKunjungan.length) return res.status(404).json({msg : `akun ini tidak memiliki kunjungan tersebut`})
 
+            // check statusnya ada atau tidak kalo ga ada kita buat status
 
             const checkStatus = await Status.findOne({id_user : id,status})
 
@@ -47,8 +52,12 @@ const singleData = async (req,res) => {
               await tambahStatus.save()
             }
 
+            // kita check dari kunjungan apakah statusnya sama dengan yang dikirimkan atau tidak
 
             if(checkUserKunjungan[0].status !== status) {
+
+                // kalo ga sama kita hapus kunjungan dari embeded sesuai dengan id status yang sudah kita check 
+                // dan kunjungan yang dihapus sesuai dengan query params
 
                 await Status.updateOne({_id : mongoose.Types.ObjectId(checkUserKunjungan[0]._id) },{
                     $pull : {
@@ -58,13 +67,28 @@ const singleData = async (req,res) => {
                     }
                 })
                 
-                await Status.updateOne({status},{
+                // kita tambahkan kunjungan yang dikirimkan ke status yang baru
+
+                await Status.updateOne({id_user : id,status},{
                     $push : {
                         kunjungan : { nama,alamat,noHP,tanggal }
                     }
                 })
+
+                // kalo misalkan ada document yang array kunjungannya kosong kita hapus
+
+                await Status.deleteOne({
+                    id_user : id,
+                    kunjungan : {
+                        $size : 0
+                    }
+                })
+    
                 
             }else{
+
+                // kalo statusnya sama kita update seperti biasa
+
                 await Status.updateOne({id_user : id,status},{
                     $set : {
                         "kunjungan.$[element].nama" : nama,
@@ -101,7 +125,8 @@ const singleData = async (req,res) => {
                 }
             })
 
-            await Status.deleteMany({
+            await Status.deleteOne({
+                id_user : id,
                 kunjungan : {
                     $size : 0
                 }

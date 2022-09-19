@@ -8,9 +8,11 @@ const login = async (req,res) => {
 
     try{
         const {email,password} = req.body
+        
+        // check dia email atau bukan
 
         if(!validator.isEmail(email)) return res.status(400).json({msg : "Yang ada masukkan bukan email"})
-
+    
         const user = await Users.findOne({email})
         if(!user) return res.status(404).json({msg : 'Silahkan buat akun terlebih dahulu'})
 

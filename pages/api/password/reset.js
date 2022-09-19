@@ -8,6 +8,8 @@ const resetPasswod = async (req,res) => {
 
     try{
         const {token,password} = req.body
+
+        // ambil token dari request yang dikirimkan
         const {id} = jwt.verify(token,process.env.SECRET_FORGOT_PASS)
 
         const user = await Users.findOne({_id : id})

@@ -5,12 +5,15 @@ import { Users } from '../../database/schemaUsers'
 const motivasi = async (req,res) => {
     if(req.method !== 'GET') return res.status(405).json({msg : "method not allowed"})
 
+    // check sudah login atau belum
+
     const {id} = await authorization(res,process.env.SECRET_LOGIN,req.headers.authorization)
 
     try{
 
-        const check = await Users.findOne({_id : id})
+      // check email
 
+        const check = await Users.findOne({_id : id})
         if(!check) return res.status(401).json({msg : 'anda belum melakukan registrasi'})
 
         const {data} = await axios.get('https://zenquotes.io/api/random ')
