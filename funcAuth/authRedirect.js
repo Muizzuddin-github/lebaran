@@ -6,7 +6,7 @@ const authRedirect = (context) => {
 
     if(token){
         try{
-            jwt.verify(token,'gass login')
+            jwt.verify(token,process.env.SECRET_LOGIN)
             return {
                 redirect : {
                     permanent : false,
